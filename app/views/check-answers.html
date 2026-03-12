@@ -1,0 +1,79 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check your answers before sending your application" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    <h1 class="govuk-heading-xl">Check your answers before sending your application</h1>
+
+    {{ govukSummaryList({
+      rows: [
+      {
+        key: { text: "Are you receiving any benefits or tax credits?" },
+        value: { text: data["receiving-benefits"] if data["receiving-benefits"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/receiving-benefits",
+            text: "Change",
+            visuallyHiddenText: "are you receiving any benefits or tax credits?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your child's full name?" },
+        value: { text: data["child-name"] if data["child-name"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/child-name",
+            text: "Change",
+            visuallyHiddenText: "what is your child's full name?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your child's date of birth?" },
+        value: { text: data["child-date-of-birth"] if data["child-date-of-birth"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/child-date-of-birth",
+            text: "Change",
+            visuallyHiddenText: "what is your child's date of birth?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is the name of your child's school?" },
+        value: { text: data["school-name"] if data["school-name"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/school-name",
+            text: "Change",
+            visuallyHiddenText: "what is the name of your child's school?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your National Insurance number?" },
+        value: { text: data["national-insurance-number"] if data["national-insurance-number"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/national-insurance-number",
+            text: "Change",
+            visuallyHiddenText: "what is your national insurance number?"
+          }]
+        }
+      }
+      ]
+    }) }}
+
+    <form method="post" novalidate>
+      {{ govukButton({ text: "Confirm and send" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
