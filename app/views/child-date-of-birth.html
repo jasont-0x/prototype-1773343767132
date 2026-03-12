@@ -1,0 +1,36 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What is your child's date of birth?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["child-date-of-birth"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["child-date-of-birth"], href: "#child-date-of-birth" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukInput({
+      id: "child-date-of-birth",
+      name: "child-date-of-birth",
+      label: {
+        text: "What is your child's date of birth?",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "For example, 27 3 2015" },
+      errorMessage: errors["child-date-of-birth"] if errors else null,
+      value: data["child-date-of-birth"]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
